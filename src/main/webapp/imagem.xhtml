@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition template="home.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<ui:define name="corpo">			  
+		<div style="background-position: 100% 0%; background-repeat: no-repeat"  >
+			<p:dialog header="Cliente" visible="true" closable="false" rendered="#{request.isUserInRole('ROLE_USER')}" 
+				draggable="false" resizable="false" width="440"   >
+				<ui:repeat var="c" value="#{usuarioBean.listUsuariologado()}">
+				  <h:panelGrid id="grid" columns="2" cellpadding="1"  >
+				      <h:panelGrid id="grid10" columns="1" cellpadding="1"  >
+					        <p:graphicImage value="/temp/#{c.cliente.idCliente}.jpg" cache="false" width="120" height="140" />
+                    
+                      </h:panelGrid>
+                      <h:panelGrid id="grid2" columns="2" cellpadding="1"  >
+                           <p:fieldset>
+                             <h:panelGrid id="grid3" columns="2" cellpadding="1" >
+                                <h:outputText value="Nome: "   />
+                                <h:outputText value="#{c.cliente.nome}"  />
+                                <h:outputText value="Cpf: "  />
+                                <h:outputText value="#{c.cliente.cpf}" />                       		
+                                <h:outputText value="E-mail: "  />
+                                <h:outputText value="#{c.cliente.email[0].email}" />
+                                <h:outputText value="Telefone: "  />
+                                <h:outputText value="#{c.cliente.telefone[0].telefone}"  />
+                                <h:outputText value="Endereço: " />
+                                <h:outputText value="#{c.cliente.endereco[0].endereco}"  />
+                             </h:panelGrid>
+                          </p:fieldset>    
+                      </h:panelGrid>
+                   </h:panelGrid>
+				</ui:repeat>
+			</p:dialog>
+		</div>
+	</ui:define>
+</ui:composition>

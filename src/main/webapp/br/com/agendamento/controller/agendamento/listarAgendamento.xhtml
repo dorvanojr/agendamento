@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+	<p:dialog  header="Agendamento Marcado" widgetVar="dlg11" modal="true"
+			height="500" width="1200" top="20">
+	
+           <h:panelGrid columns="3" cellpadding="1"  >      
+				<h:outputLabel   value="Medico: " style="font-weight:bold" />
+				   <p:spacer width="5" height="10" />
+				<h:selectOneMenu  value="#{agendamentoBean.idMedicos}" style="width: 258px;">
+								<f:selectItem itemLabel="Selecione Medico" itemValue="" />
+								<f:selectItems value="#{medicoBean.listMedicosAll()}" var="esp" itemLabel="#{esp.nmMedico}" itemValue="#{esp.idMedico}" />
+				                <p:ajax event="change"  update="tabela3" listener="#{agendamentoBean.listarAgendaConfirmada()}" ajax="false" />
+				</h:selectOneMenu>	 
+		   </h:panelGrid>
+		   <br/>
+			 <h:panelGrid  columns="1" cellpadding="4" >
+						 <p:dataTable id="tabela3"   editable="true"  var="c"  value="#{agendamentoBean.listarAgendaConfirms}">
+						         <p:column headerText="Cliente">
+					                        <h:outputText value="#{c.cliente.nome}" />   
+				                   </p:column>
+				                   <p:column headerText="Cliente Endereco">
+					                        <h:outputText value="#{c.cliente.endereco[0].endereco}" />   
+				                   </p:column>
+				                     <p:column headerText="Cliente Telefone">
+					                        <h:outputText value="#{c.cliente.telefone[0].telefone}" />   
+				                   </p:column>
+				                  <p:column headerText="Data">
+					                        <h:outputText value="#{c.horarioDiaSemanal.dataDisponivel}" > 
+					                            <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />  
+					                        </h:outputText> 
+				                   </p:column>
+			                       <p:column headerText="Hora">				                        
+					                       <h:outputText value="#{c.horarioDiaSemanal.horario}" >
+					                                   <f:convertDateTime pattern="HH:mm" timeZone="America/Sao_Paulo" />
+					                        </h:outputText> 
+				                   </p:column>
+				                   <p:column headerText="Unidade">
+					                                  <h:outputText value="Guara" />
+				                   </p:column>
+				                   <p:column headerText="Clinica">
+					                             <h:outputText value="#{c.clinica.nomeFantasia}" />
+				                   </p:column>
+				                   <p:column headerText="profissional">
+					                              <h:outputText value="#{c.medico.nmMedico}" />
+				                   </p:column>
+				                   <p:column style="text-align: center">
+					                      <f:facet name="header">
+						                         <h:outputText value="Excluir" />
+					                    </f:facet>
+					                   <p:commandButton value="Excluir" action="#{horarioBean.excluir()}"  update="tabela3" />
+				                   </p:column>
+		               </p:dataTable>
+		               
+		             
+				 </h:panelGrid>
+        
+
+      </p:dialog>
+
+</html>

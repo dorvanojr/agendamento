@@ -1,0 +1,144 @@
+.relatorio {
+	position: absolute;
+	top: 5px;
+	left: 450px;
+	margin: 0px;
+	padding: 0px;
+	width: 100px;
+	height: 170px;
+}
+
+.menu {
+	position: absolute;
+	top: 5px;
+	left: 200px;
+	margin: 0px;
+	padding: 0px;
+	width: 100px;
+	height: 170px;
+}
+
+.botaoAgendar {
+	position: absolute;
+	top: 5px;
+	left: 200px;
+	margin: 0px;
+	padding: 0px;
+	width: 140px;
+	height: 33px;
+}
+
+.botaoAgendar1 {
+	position: absolute;
+	top: 5px;
+	left: 250px;
+	margin: 0px;
+	padding: 0px;
+	width: 140px;
+	height: 33px;
+}
+	
+.listaAgendar {
+	position: absolute;
+	top: 5px;
+	left: 250px;
+	margin: 0px;
+	padding: 0px;
+	width: 140px;
+	height: 33px;
+}	
+	
+	
+
+.fin{
+	
+	position: absolute;
+	top: 5px;
+	left: 300px;
+	margin: 0px;
+	padding: 0px;
+	width: 140px;
+	height: 33px;
+	
+	
+}
+
+.imagem{
+	position: abasolute;
+	top: 40px;
+	left: 400px;
+	margin: 0px;
+	padding: 0px;
+	width:"100px";
+	height:"100px"; 
+}
+.estoque{
+    position: absolute;
+	top: 5px;
+	left: 50px;
+	margin: 0px;
+	padding: 0px;
+	width: 140px;
+	height: 33px;
+}
+
+
+.icone {
+	position: absolute;
+	top: 10px;
+	left: 380px;
+	margin: 0px;
+	padding: 0px;
+	width: 140px;
+	height: 33px;
+}
+
+.icone1 {
+	position: absolute;
+	top: 10px;
+	left: 380px;
+	margin: 0px;
+	padding: 0px;
+	width: 100px;
+	height: 33px;
+}
+
+
+
+.icone-i {
+	position: absolute;
+	top: 5px;
+	left: 740px;
+	margin: 0px;
+	padding: 0px;
+	width: 100px;
+	height: 33px;
+}
+
+
+.ui-icon-i {
+	position: absolute;
+	top: 5px;
+	left: 10px;
+	margin: 0px;
+	padding: 0px;
+	width: 100px;
+	height: 33px;
+}
+
+.panel{
+	
+    position: absolute;
+	top: 250px;
+	left: 0px;
+	margin: 0px;
+	padding: 0px;
+	width: 200px;
+	height: 454px;
+	
+}
+
+
+.gravar {
+	background-image: url("../img/cad.png") !important;
+}

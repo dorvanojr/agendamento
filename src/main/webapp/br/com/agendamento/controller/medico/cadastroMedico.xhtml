@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+	<p:dialog  header="Cadastro Medico" widgetVar="dlg5" modal="true"  id="dialog"
+			height="700" width="1200" top="20" >
+			
+				
+				<p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true"  showSummary="false"  />
+					    
+						<h:panelGrid id="grid" columns="2" cellpadding="1"  >
+                   
+					 <h:outputLabel value="Nome Medico  " style="font-weight:bold" />
+					 <h:outputLabel value=" CNPJ/ CPF:" style="font-weight:bold" />
+					 <p:inputText value="#{medicoBean.medico.nmMedico}" size="50"  />
+					 <p:inputText value="#{medicoBean.medico.cpfCnpj}" />
+					
+					 
+				     <h:outputLabel value="Email" style="font-weight:bold"  />
+					 <h:outputLabel value="Especialidade" style="font-weight:bold"  />
+					 <p:inputText value="#{medicoBean.email.email}"  size="50"   />
+					<h:selectOneMenu id="classe1" value="#{medicoBean.idEspecialidade}" style="width: 258px;" >
+                     <f:selectItem itemLabel="Selecione Especialidade" itemValue="" />
+                                <f:selectItems value="#{especialidadeBean.listEspecialidadeAll()}" var="esp" itemLabel="#{esp.nome}" itemValue="#{esp.idEspecialidade}" />
+                     </h:selectOneMenu>  
+					<h:panelGrid  columns="1" cellpadding="1">
+					
+                      <h:panelGrid  columns="1" cellpadding="1"> 
+					      <h:outputLabel value="Endereço" style="font-weight:bold"  />
+					        <p:inputText value="#{medicoBean.endereco.endereco}"  size="50" />
+					  </h:panelGrid>
+			
+					
+					<h:panelGrid  columns="4" cellpadding="1"> 
+				
+					   <h:outputLabel value="Bairro " style="font-weight:bold"  />
+					   <h:outputLabel value="Cidade" style="font-weight:bold" />
+					   <h:outputLabel value="UF " style="font-weight:bold"  />
+					   <h:outputLabel value="CEP" style="font-weight:bold" />
+					
+					  <p:inputText value="#{medicoBean.endereco.bairro}" size="15"/>
+					  <p:inputText value="#{medicoBean.endereco.cidade}" size="15"/>
+					  <p:inputText value="#{medicoBean.endereco.uf}" size="3" />
+					  <p:inputText value="#{medicoBean.endereco.cep}" size="10"/>
+				          
+					</h:panelGrid>
+					
+					</h:panelGrid>
+					<h:panelGrid columns="1" cellpadding="1"> 
+					   
+					    <h:outputLabel value="Telefone " style="font-weight:bold"  />
+					   
+					    <p:inputText value="#{medicoBean.telefone.telefone}"  />  
+					   					
+					 </h:panelGrid>
+
+					<h:panelGrid  columns="1" cellpadding="1"> 
+					    <h:outputLabel value="Observações " style="font-weight:bold"  />
+					    <p:inputTextarea rows="10" cols="50" value="#{medicoBean.medico.observacaoMedicinal}"   style="font-weight:bold" />
+					</h:panelGrid>
+
+					 <h:panelGrid columns="1" cellpadding="1" >  
+					   
+					    <h:outputLabel value="Residencial" style="font-weight:bold"  />
+					    <p:inputText value="#{medicoBean.telefone.residencial}" />
+					     
+					    <h:outputLabel value="Celular " style="font-weight:bold"  />
+					    <p:inputText value="#{medicoBean.telefone.celular}" />    
+					    
+					    <h:outputLabel value="Whatapps" style="font-weight:bold"  />
+					    <p:inputText value="#{medicoBean.telefone.whatapps}" />    
+					    
+					    <h:outputLabel value=" Fax " style="font-weight:bold"  />
+					    <p:inputText value="#{medicoBean.telefone.fax}" />  
+					
+					 </h:panelGrid>
+				 </h:panelGrid>
+
+				<p:commandButton value="Cadastrar" ajax="false" icon="ui-icon-check"
+					style="margin-right:10px" action="#{medicoBean.save}"
+					update="growl" />
+				<p:commandButton value="Cancelar" update="grid" icon="ui-icon-check"
+					style="margin-right:10px" oncomplete="PF('dlg2').hide()"/>
+	
+                
+		   </p:dialog>
+
+</html>
+

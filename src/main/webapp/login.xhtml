@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:th="http://www.thymeleaf.org"
+    xmlns:tiles="http://www.thymeleaf.org">
+<h:head>
+	<title>Sistema de Agendamento</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title></title>
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width" />
+
+	<link rel="stylesheet" href="css1/bootstrap.min.css" />
+	<style>
+body {
+	padding-top: 200px;
+	padding-bottom: 40px;
+	background-color: #eeeeee;
+	font-size: 12px;
+}
+</style>
+	<link rel="stylesheet" href="css1/bootstrap-responsive.min.css" />
+	<link rel="stylesheet" href="css1/main.css" />
+
+</h:head>
+<h:body style=" background-position: 50% 0%;background-repeat: no-repeat">
+      <p:dialog header="Sistema de Agendamento"
+			visible="true" closable="false" draggable="false" resizable="false" width="420"  >
+            <center>
+                <h:outputText value="Usuário ou senha incorretos!" rendered="#{param.erro}" style="color: darkred"/>
+            </center>
+            <form action="j_spring_security_check" method="post">
+                <h:panelGrid columns="1" cellpadding="5">
+                    <h:outputLabel for="j_username" value="Login: *"  /> 
+                    <h:inputText id="j_username" required="true" size="40"/>
+                    <h:outputLabel for="j_password" value="Password: * " />
+                    <h:inputSecret id="j_password" required="true" size="40"/>
+                    <h:commandButton value="Login" action="facesContext.externalContext.requestContextPath}/j_spring_security_check"/>
+                    <h:outputLink value="#{controllerRoute.cadastroUsuario()}">
+					    <h:outputText value="Cadastro de Usuarios" styleClass="icone" />
+				   </h:outputLink>
+                </h:panelGrid>
+            </form>
+        </p:dialog>
+</h:body>
+</html>

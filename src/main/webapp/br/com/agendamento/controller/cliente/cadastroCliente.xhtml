@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:repeat var="c" value="#{usuarioBean.listUsuariologado()}">
+				  
+	<p:dialog  header="Cadastro Cliente" widgetVar="dlg2" modal="true"  id="dialog"
+			height="700" width="800" top="20" >
+			
+				
+				<p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true"  showSummary="false"  />
+					    
+						<h:panelGrid id="grid" columns="2" cellpadding="1"  >
+                   
+					 <h:outputLabel value="Nome Completo  " style="font-weight:bold" />
+					 <h:outputLabel value="CPF:" style="font-weight:bold" />
+					 <p:inputText value="#{c.cliente.nome}" size="50"   rendered="#{c.cliente != null}"/>
+					 <p:inputText value="#{c.cliente.cpf}" rendered="#{c.cliente != null}"/>
+					
+					 
+				     <h:outputLabel value="Email" style="font-weight:bold"  />
+					 <h:outputLabel value="Data Nascimento" style="font-weight:bold"  />
+			         <p:inputText value="#{c.cliente.email[0].email}"  size="50"  rendered="#{c.cliente != null and  c.cliente.email[0]!=null}" />	
+					  <p:inputText value="#{clienteBean.email.email}"  size="50" rendered="#{c.cliente != null and  c.cliente.email[0]==null}"  />
+
+
+					 
+					 <p:inputText value="#{c.cliente.dataNasc}"  size="20" rendered="#{c.cliente != null}" />	
+					
+					<h:panelGrid  columns="1" cellpadding="1">
+					
+                      <h:panelGrid  columns="1" cellpadding="1"> 
+					      <h:outputLabel value="Endereço" style="font-weight:bold"  />
+					      	<p:inputText value="#{c.cliente.endereco[0].endereco}" rendered="#{c.cliente != null and  c.cliente.endereco[0] !=null}" size="50" />
+					        <p:inputText value="#{clienteBean.endereco.endereco}" rendered="#{c.cliente != null and  c.cliente.endereco[0] == null}" size="50" />
+					  </h:panelGrid>
+				   <h:panelGrid  columns="4" cellpadding="1" rendered="#{c.cliente != null and c.cliente.endereco[0]!=null}"> 
+				
+					   <h:outputLabel value="Bairro " style="font-weight:bold"  />
+					   <h:outputLabel value="Cidade" style="font-weight:bold" />
+					   <h:outputLabel value="UF " style="font-weight:bold"  />
+					   <h:outputLabel value="CEP" style="font-weight:bold" />
+					
+					  <p:inputText value="#{c.cliente.endereco[0].bairro}"   size="15"/>
+					  <p:inputText value="#{c.cliente.endereco[0].cidade}" size="15"/>
+					  <p:inputText value="#{c.cliente.endereco[0].uf}"   size="3" />
+					  <p:inputText value="#{c.cliente.endereco[0].cep}"  size="10"/>
+				   
+					</h:panelGrid>
+					
+					<h:panelGrid  columns="4" cellpadding="1" rendered="#{c.cliente != null and c.cliente.endereco[0]==null}"> 
+				
+					   <h:outputLabel value="Bairro " style="font-weight:bold"  />
+					   <h:outputLabel value="Cidade" style="font-weight:bold" />
+					   <h:outputLabel value="UF " style="font-weight:bold"  />
+					   <h:outputLabel value="CEP" style="font-weight:bold" />
+					
+					  <p:inputText value="#{clienteBean.endereco.bairro}" size="15"/>
+					  <p:inputText value="#{clienteBean.endereco.cidade}" size="15"/>
+					  <p:inputText value="#{clienteBean.endereco.uf}" size="3" />
+					  <p:inputText value="#{clienteBean.endereco.cep}" size="10"/>
+				          
+					</h:panelGrid>
+					
+					</h:panelGrid>
+					<h:panelGrid columns="1" cellpadding="1"> 
+					   
+					    <h:outputLabel value="Telefone " style="font-weight:bold"  />
+					   
+					    <p:inputText value="#{c.cliente.telefone[0].telefone}" rendered="#{c.cliente != null and c.cliente.telefone[0]!=null}"  />  
+					    <p:inputText value="#{clienteBean.telefone.telefone}" rendered="#{c.cliente != null and c.cliente.telefone[0]==null}" />  
+					
+					 </h:panelGrid>
+
+					<h:panelGrid  columns="1" cellpadding="1"> 
+					    <h:outputLabel value="Observações " style="font-weight:bold"  />
+					    <p:inputTextarea rows="10" cols="50" value="#{c.cliente.observacao}"   rendered="#{c.cliente != null}" style="font-weight:bold" />
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1" cellpadding="1" rendered="#{c.cliente != null and c.cliente.telefone[0]!=null}">  
+					   
+					    <h:outputLabel value="Residencial" style="font-weight:bold"  />
+					    <p:inputText value="#{c.cliente.telefone[0].residencial}" rendered="#{c.cliente != null }"/>
+					     
+					    <h:outputLabel value="Celular " style="font-weight:bold"  />
+					    <p:inputText value="#{c.cliente.telefone[0].celular}" rendered="#{c.cliente != null }"/>    
+					    
+					    <h:outputLabel value="Whatapps" style="font-weight:bold"   />
+					    <p:inputText value="#{c.cliente.telefone[0].whatapps}" rendered="#{c.cliente != null }" />    
+					    
+					    <h:outputLabel value=" Fax " style="font-weight:bold"  />
+					    <p:inputText value="#{c.cliente.telefone[0].fax}" rendered="#{c.cliente != null }"/>  
+					
+					 </h:panelGrid>
+					 
+					 <h:panelGrid columns="1" cellpadding="1" rendered="#{c.cliente != null and c.cliente.telefone[0]==null}">  
+					   
+					    <h:outputLabel value="Residencial" style="font-weight:bold"  />
+					    <p:inputText value="#{clienteBean.telefone.residencial}" />
+					     
+					    <h:outputLabel value="Celular " style="font-weight:bold"  />
+					    <p:inputText value="#{clienteBean.telefone.celular}" />    
+					    
+					    <h:outputLabel value="Whatapps" style="font-weight:bold"  />
+					    <p:inputText value="#{clienteBean.telefone.whatapps}" />    
+					    
+					    <h:outputLabel value=" Fax " style="font-weight:bold"  />
+					    <p:inputText value="#{clienteBean.telefone.fax}" />  
+					
+					 </h:panelGrid>
+				 </h:panelGrid>
+				
+                 <h:panelGrid  columns="2" cellpadding="1"  rendered="#{c.cliente != null and c.cliente.planoasaude[0]!=null}">
+					     <h:outputLabel value="Carterinha " style="font-weight:bold"  />
+					    <h:outputLabel value="Operadora " style="font-weight:bold"  />
+					    
+					    <p:inputText value="#{c.cliente.planoasaude[0].carterinha}"  size="15"  /> 
+					    <p:inputText value="#{c.cliente.planoasaude[0].plano}" size="40" /> 
+				</h:panelGrid>
+				 <h:panelGrid  columns="1" cellpadding="1"  rendered="#{c.cliente != null and  c.cliente.planoasaude[0]!=null}">
+					    <h:outputLabel value="Produto " style="font-weight:bold"  />
+					    
+					    <p:inputText value="#{c.cliente.planoasaude[0].produto}" size="30" /> 
+				</h:panelGrid>
+				
+				 <h:panelGrid  columns="2" cellpadding="1"  rendered="#{c.cliente != null and c.cliente.planoasaude[0]==null}">
+					    <h:outputLabel value="Carterinha " style="font-weight:bold"  />
+					    <h:outputLabel value="Operadora " style="font-weight:bold"  />
+					   
+					    
+					    <p:inputText value="#{clienteBean.planoSaude.carterinha}"  size="15"  /> 
+					    <p:inputText value="#{clienteBean.planoSaude.plano}" size="20" /> 
+				</h:panelGrid>
+		        <h:panelGrid  columns="1" cellpadding="1"  rendered="#{c.cliente != null and c.cliente.planoasaude[0]==null}">
+                  <h:outputLabel value="Produto " style="font-weight:bold"  />
+                  <p:inputText value="#{clienteBean.planoSaude.produto}" size="20" /> 
+             </h:panelGrid>
+
+				<p:commandButton value="Cadastrar" ajax="false" icon="ui-icon-check"
+					style="margin-right:10px" action="#{clienteBean.save(c)}"
+					update="growl" />
+				<p:commandButton value="Cancelar" update="grid" icon="ui-icon-check"
+					style="margin-right:10px" oncomplete="PF('dlg2').hide()"/>
+	
+                
+		   </p:dialog>
+    </ui:repeat>
+</html>
+

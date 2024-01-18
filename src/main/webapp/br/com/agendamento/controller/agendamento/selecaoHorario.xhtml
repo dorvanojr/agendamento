@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://java.sun.com/jsf/core">
+
+              <h:panelGrid columns="1" cellpadding="10">
+
+							
+
+							<h:panelGrid id="panel" columns="1" cellpadding="4">
+							 	<h:outputLabel for="medicos1" value="Medicos" style="font-weight:bold" />
+										<h:selectOneMenu id="medicos1"  
+										                 value="#{agendamentoBean.medico}" 
+										                 style="width: 258px;" >
+											<f:selectItem itemLabel="Selecione Medicos" itemValue="" />
+											<f:selectItems
+												value="#{agendamentoBean.medicos}"
+												var="esp" itemLabel="#{esp.nmMedico}"/>
+												<f:converter converterId="entityConverter"/>
+											 <p:ajax event="change"  update="panel" listener="#{agendamentoBean.getListaMedicosID()}"> </p:ajax>	
+								   </h:selectOneMenu>
+								<p:panel   header="Filtro Selecionado " style="width:1000px;">
+										 	<ui:repeat var="c" value="#{agendamentoBean.listarMedicos}">
+										 	    <h:panelGrid columns="5" >
+										 	       <h:outputLabel value="Estado: " style="font-weight:bold" />
+										     	    <p:outputLabel value="Distrito Federal" size="50"  />
+										     	   <p:spacer width="320" height="10" />
+										     	   <h:outputLabel value="Região: " style="font-weight:bold" />
+										     	    <p:outputLabel value="Guara" size="50"  />
+										        </h:panelGrid>
+										 	  	<h:panelGrid columns="5" cellpadding="4">
+										 	       <h:outputLabel value="Clinica: " style="font-weight:bold" />
+										     	   <p:outputLabel value="#{c.clinica.nomeFantasia}" size="50" rendered="#{c.clinica != null}" />
+										            <p:spacer width="285" height="10" />
+										           <h:outputLabel value="Especialidade: " style="font-weight:bold" />
+										           <p:outputLabel value="#{c.clinica.especialidade.nome}" size="50" rendered="#{c != null}" />
+										        </h:panelGrid>
+										           <h:panelGrid columns="5" cellpadding="4">
+										 	       <h:outputLabel value="Unidade: " style="font-weight:bold" />
+										     	   <p:outputLabel value="Guara" size="50"  />
+										     	    <p:spacer width="370" height="10" />
+										           <h:outputLabel value="Medico: " style="font-weight:bold" />
+										           <p:outputLabel value="#{c.nmMedico}" size="50" rendered="#{c != null}" />
+										        </h:panelGrid>
+										 	</ui:repeat>
+								</p:panel>
+								<p:panel header="Horários disponiveis para os filtros selecionados ">
+									<h:panelGrid columns="1" cellpadding="4" >
+						                <p:dataTable id="tabela2"   editable="true"  var="c"  value="#{agendamentoBean.listaHorarios}"
+						                selection="#{agendamentoBean.horarioDiaSemanal}"  rowKey="#{c.idHorariodiasemanal}">
+				                               <p:column selectionMode="single"/>
+				                               <p:column headerText="Data">
+					                               <h:outputText value="#{c.dataDisponivel}" > 
+					                                     <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />  
+					                               </h:outputText> 
+				                               </p:column>
+			                                   <p:column headerText="Hora">				                        
+					                               <h:outputText value="#{c.horario}" >
+					                                   <f:convertDateTime pattern="HH:mm" timeZone="America/Sao_Paulo" />
+					                               </h:outputText> 
+				                              </p:column>
+				                              <p:column headerText="Unidade">
+					                                    <h:outputText value="Guara" />
+				                              </p:column>
+				                              <p:column headerText="Clinica">
+					                                  <h:outputText value="#{c.medico.clinica.nomeFantasia}" />
+				                             </p:column>
+				                              <p:column headerText="profissional">
+					                              <h:outputText value="#{c.medico.nmMedico}" />
+				                             </p:column>
+		                                </p:dataTable>
+									</h:panelGrid>
+								</p:panel> 
+							</h:panelGrid>
+							  <p:commandButton value="Avançar" ajax="false"  
+								icon="ui-icon-check" action="#{agendamentoBean.habAba2()}" update=":form:tbv"/>
+								
+						</h:panelGrid>
+
+</html>

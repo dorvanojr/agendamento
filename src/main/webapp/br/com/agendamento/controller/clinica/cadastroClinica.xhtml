@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+	<p:dialog  header="Cadastro Clinica" widgetVar="dlg3" modal="true"
+			height="500" width="1000" top="20">
+			
+           
+				<p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true"  showSummary="false"  />
+
+				<h:panelGrid id="grid" columns="2" cellpadding="1"  >
+                  
+					<h:outputLabel value="Razão Social " style="font-weight:bold" />
+					<h:outputLabel value="CNPJ" style="font-weight:bold" />
+					
+					<p:inputText value="#{clinicaBean.clinica.razaoSocial}" size="50"/>
+					<p:inputText value="#{clinicaBean.clinica.cnpj}" />
+
+                    <h:outputLabel value="Nome Fantasia" style="font-weight:bold" />
+					<h:outputLabel value="Especialidade" style="font-weight:bold"  />
+					     
+					<p:inputText value="#{clinicaBean.clinica.nomeFantasia}" size="50"/>
+				     <h:selectOneMenu id="classe6" value="#{clinicaBean.idEspecialidade}" style="width: 258px;" >
+                     <f:selectItem itemLabel="Selecione Especialidade" itemValue="" />
+                                <f:selectItems value="#{especialidadeBean.listEspecialidadeAll()}" var="esp" itemLabel="#{esp.nome}" itemValue="#{esp.idEspecialidade}" />
+                     </h:selectOneMenu>     
+
+				   <h:outputLabel value="Endereço" style="font-weight:bold"  />
+				   <h:outputLabel value="E-mail" style="font-weight:bold"  />
+				    <p:inputText value="#{clinicaBean.endereco.endereco}"  size="50" />
+					 <p:inputText value="#{clinicaBean.email.email}" size="30"/>
+					
+					
+					
+					<h:panelGrid  columns="4" cellpadding="1"> 
+				
+					   <h:outputLabel value="Bairro " style="font-weight:bold"  />
+					   <h:outputLabel value="Cidade" style="font-weight:bold" />
+					   <h:outputLabel value="UF " style="font-weight:bold"  />
+					   <h:outputLabel value="CEP" style="font-weight:bold" />
+					
+					  <p:inputText value="#{clinicaBean.endereco.bairro}" size="15"/>
+					  <p:inputText value="#{clinicaBean.endereco.cidade}" size="15"/>
+					  <p:inputText value="#{clinicaBean.endereco.uf}" size="3" />
+					  <p:inputText value="#{clinicaBean.endereco.cep}" size="10"/>
+				   
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1" cellpadding="1"> 
+					   
+					    <h:outputLabel value="Telefone " style="font-weight:bold"  />
+					   
+					    <p:inputText value="#{clinicaBean.telefone.telefone}" />  
+					
+					 </h:panelGrid>
+
+					 <h:panelGrid columns="2" cellpadding="1" >  
+					   
+					    <h:outputLabel value="Residencial" style="font-weight:bold"/>
+					    <h:outputLabel value="Celular " style="font-weight:bold"  />
+					      
+					    <p:inputText value="#{clinicaBean.telefone.residencial}" />
+					    <p:inputText value="#{clinicaBean.telefone.celular}" />    
+			
+					 </h:panelGrid>
+					 <h:panelGrid columns="1" cellpadding="1" >  
+
+					    <h:outputLabel value="Whatapps" style="font-weight:bold"  />
+					      
+					  
+					    <p:inputText value="#{clinicaBean.telefone.whatapps}" />   
+					
+					 </h:panelGrid>
+					 
+					  <h:panelGrid columns="1" cellpadding="1" >  
+					  
+					    <h:outputLabel value=" Fax " style="font-weight:bold"  />
+					      
+					    <p:inputText value="#{clinicaBean.telefone.fax}" />  
+					
+					 </h:panelGrid>
+			
+			       
+			
+				</h:panelGrid>
+				 <h:panelGrid columns="2" cellpadding="1" >  
+					  
+					    <h:outputLabel value=" login " style="font-weight:bold"  />
+					    <h:outputLabel value=" senha" style="font-weight:bold"  /> 
+					    <p:inputText  value="#{clinicaBean.user.username}"/>  
+					    <p:inputText  value="#{clinicaBean.user.password}"/>  
+					 </h:panelGrid>
+                 <br/>
+				<p:commandButton value="Cadastrar" ajax="false" icon="ui-icon-check"
+					style="margin-right:10px" action="#{clinicaBean.save}"
+					update="growl" />
+				<p:commandButton value="Cancelar" update="grid" icon="ui-icon-check"
+					style="margin-right:10px" oncomplete="PF('dlg2').hide()"/>
+	
+                
+		   </p:dialog>
+
+</html>
+

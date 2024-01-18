@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:repeat var="c" value="#{usuarioBean.listUsuariologado()}">
+
+	<p:dialog  header="Cadastro Planos Saude" widgetVar="dlg12" modal="true"
+			height="370" width="600" top="20">
+    
+		        <h:panelGrid columns="1" cellpadding="1"  >      
+				
+		            <p:panel header="Planos de Saude">
+		              <p:selectManyMenu id="advanced" value="#{planosBean.selectedPlanos}" size="100"  style="width:500px; height:240px; "
+                            var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+                           <f:selectItems value="#{planosBean.listPlanosAll()}" var="theme" itemLabel="#{theme.nomePlanos}" itemValue="#{theme}" />
+                          <f:converter converterId="entityConverter"/> 
+                          <p:column>
+                              <h:outputText value="#{t.nomePlanos}" />
+                          </p:column>
+                      </p:selectManyMenu>  
+                     </p:panel>    
+				 </h:panelGrid>
+                 <h:panelGrid columns="2" cellpadding="1"  > 
+                    <p:commandButton value="Cadastrar" ajax="false" icon="ui-icon-check"
+					    style="margin-right:10px"  action="#{planosBean.update(c)}"/>
+				    <p:commandButton value="Cancelar" icon="ui-icon-check"
+					   style="margin-right:10px" oncomplete="PF('dlg12').hide()"/>
+	
+                 </h:panelGrid> 
+      </p:dialog>
+</ui:repeat>
+</html>

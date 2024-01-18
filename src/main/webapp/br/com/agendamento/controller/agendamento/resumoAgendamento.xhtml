@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://java.sun.com/jsf/core">
+
+<h:panelGrid columns="1" cellpadding="10"> 
+               <p:growl id="growl5"  sticky="true"  showDetail="true"  rendered="#{not facesContext.validationFailed}"/>
+   
+							<h:panelGrid columns="2" cellpadding="4">
+							
+								<p:panel header="Dados do Beneficiario">
+									<h:panelGrid columns="1" cellpadding="4">
+										<ui:repeat var="c" value="#{usuarioBean.listUsuariologado()}">
+											<h:outputLabel value="Nome: " style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.nome}" size="50" rendered="#{c.cliente != null}" />
+											<br /><br /><br />
+											<h:outputLabel value="CPF:" style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.cpf}" rendered="#{c.cliente != null}" />
+											<br /><br /><br />
+											<h:outputLabel value="E-mail:" style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.email[0].email}" rendered="#{c.cliente != null}" />
+											<br /><br /><br />
+											<h:outputLabel value="Telefone:" style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.telefone[0].telefone}"  rendered="#{c.cliente != null}" />
+											<br /><br /><br />
+											<h:outputLabel value="Endereco:" style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.endereco[0].endereco}" rendered="#{c.cliente != null}" />
+											<br /><br /><br />
+											<h:outputLabel value="Carteirinha:" style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.planoasaude[0].carterinha}" rendered="#{c.cliente != null}" />
+											<br /><br /><br />
+											<h:outputLabel value="Plano:" style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.planoasaude[0].plano}" rendered="#{c.cliente != null}" />
+											<br /> <br />
+											<h:outputLabel value="Produto:" style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.planoasaude[0].produto}" rendered="#{c.cliente != null}" />
+										</ui:repeat>
+									</h:panelGrid>
+								</p:panel> 
+
+								<p:panel header="Status">
+									<h:panelGrid  columns="1" cellpadding="4">
+										   <h:outputLabel value="Agendamento Realizado com Sucesso" style="font-weight:bold" />
+										   <h:outputLabel value="O Resumo do seu Agendamento foi" style="font-weight:bold" />
+										   <h:outputLabel value="enviado para seu e-mail cadastrado" style="font-weight:bold" />
+									</h:panelGrid>
+								</p:panel>
+							   
+							  	
+							</h:panelGrid>
+							  
+						</h:panelGrid>
+                             
+								<p:commandButton value="Finalizar" ajax="false" 
+								icon="ui-icon-check"  action="#{agendamentoBean.save()}" />
+</html>

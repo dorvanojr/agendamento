@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+			<p:dataTable id="tabela1"  value="#{medicoBean.listMedicosAll()}" var="c"
+				 editable="true" style="margin-bottom:20px" resizable="false"
+				closeOnEscape="true" paginator="true" rows="15">
+				
+				 <f:facet name="header">
+                 Listar Medicos
+                  </f:facet>
+                  
+				 <p:ajax event="rowEdit" listener="#{medicoBean.onRowEdit}"
+					update=":form:msgs1" />
+				<p:ajax event="rowEditCancel"
+					listener="#{medicoBean.onRowCancel}" update=":form:msgs1" />
+			
+			
+
+				<p:column headerText="id">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.idMedico}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.idMedico}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Nome">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.nmMedico}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.nmMedico}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="CPF/CNPJ">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.cpfCnpj}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.cpfCnpj}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Dias de Atendimento">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.diasAtendimento}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.diasAtendimento}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Horario de Atendimento">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.horarioAtendimento}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.horarioAtendimento}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Clinica">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.clinica.nomeFantasia}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.clinica.nomeFantasia}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>	
+				</p:column>
+				<p:column headerText="Endereco">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.endereco[0].endereco}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.endereco[0].endereco}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Telefone">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.telefone[0].telefone}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.telefone[0].telefone}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column style="text-align: center">
+					<f:facet name="header">
+						<h:outputText value="Alterar" />
+					</f:facet>
+					<p:rowEditor />
+				</p:column>
+			</p:dataTable>
+
+</html>
+

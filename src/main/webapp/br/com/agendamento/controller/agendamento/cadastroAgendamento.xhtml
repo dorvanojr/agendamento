@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Sistema de Agendamento</title>
+	<style>
+body {
+	background-color: #eeeeee;
+	padding-bottom: 40px;
+}
+</style>
+</h:head>
+
+<h:body>
+
+	<p:panel header="Agendamento">
+		
+    <h:form id="form">
+
+			<h:panelGrid columns="2" cellpadding="4">
+
+				<p:tabView id="tbv" dynamic="true"  
+				           cache="false"  
+				           activeIndex="#{agendamentoBean.activeTabIndex}">
+				   
+					<p:tab title="Seleção de Filtro" id="tab0" >
+						 <ui:include src="selecaoFiltro.xhtml"/>	
+					</p:tab>
+					<p:tab title="Seleção de Horario" id="tab1" disabled="#{agendamentoBean.disableTab}" >
+						 <ui:include src="selecaoHorario.xhtml"/>	
+					</p:tab>
+					<p:tab title="Confirmação de Horario" id="tab2" disabled="#{agendamentoBean.disableTab1}">
+						 <ui:include src="confirmacaoHorario.xhtml"/>
+					</p:tab>
+					<p:tab title="Resumo de Agendamento" id="tab3" disabled="#{agendamentoBean.disableTab2}" >
+					    <ui:include src="resumoAgendamento.xhtml"/>
+					</p:tab>
+				</p:tabView>
+
+			</h:panelGrid>
+                            <p:commandButton value="Voltar" ajax="true" icon="ui-icon-check"
+								style="margin-right:10px" action="#{controllerRoute.home}"
+								update=":form" immediate="true" process="@this" />
+							
+            </h:form>	
+	</p:panel>
+</h:body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://java.sun.com/jsf/core">
+
+<h:panelGrid columns="1" cellpadding="10">
+                 <h:messages style="color:red;margin:8px;"  rendered="#{not facesContext.validationFailed}" />
+						
+
+							<h:panelGrid columns="2" cellpadding="4">
+							
+								<p:panel header="Dados do Beneficiario">
+									<h:panelGrid columns="1" cellpadding="4">
+										<ui:repeat var="c" value="#{usuarioBean.listUsuariologado()}">
+											<h:outputLabel value="Nome: " style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.nome}" size="50" rendered="#{c.cliente != null}" />
+											<br /><br /><br />
+											<h:outputLabel value="CPF:" style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.cpf}" rendered="#{c.cliente != null}" />
+											<br /><br /><br />
+											<h:outputLabel value="E-mail:" style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.email[0].email}" rendered="#{c.cliente != null}" />
+											<br /><br /><br />
+											<h:outputLabel value="Telefone:" style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.telefone[0].telefone}"  rendered="#{c.cliente != null}" />
+											<br /><br /><br />
+											<h:outputLabel value="Endereco:" style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.endereco[0].endereco}" rendered="#{c.cliente != null}" />
+											<br /><br /><br />
+											<h:outputLabel value="Carteirinha:" style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.planoasaude[0].carterinha}" rendered="#{c.cliente != null}" />
+											<br /><br /><br />
+											<h:outputLabel value="Plano:" style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.planoasaude[0].plano}" rendered="#{c.cliente != null}" />
+											<br /> <br />
+											<h:outputLabel value="Produto:" style="font-weight:bold" />
+											<p:outputLabel value="#{c.cliente.planoasaude[0].produto}" rendered="#{c.cliente != null}" />
+										</ui:repeat>
+									</h:panelGrid>
+								</p:panel> 
+
+								<p:panel header="Filtro de Agendamento">
+									<h:panelGrid id="grid1" columns="1" cellpadding="4">
+										<h:outputLabel value="Estado" style="font-weight:bold" />
+										<h:selectOneMenu id="classe5" style="width: 258px;">
+											<f:selectItem itemLabel="Distrito Federal" itemValue="" />
+										</h:selectOneMenu>
+										<h:outputLabel  for="especialidade1" value="Especialidade" style="font-weight:bold" />
+										<h:selectOneMenu id="especialidade1"
+											             value="#{especialidadeBean.idEspecialidade}"
+											             style="width: 258px;"
+											             process="@this"
+											             required="true"
+										                 requiredMessage="Campo Especialista Vazio">
+											<f:selectItem itemLabel="Selecione Especialidade"
+												itemValue="" />
+											<f:selectItems 
+												value="#{especialidadeBean.listEspecialidadeAll()}"
+												var="esp" itemLabel="#{esp.nome}" itemValue="#{esp.idEspecialidade}"/>
+											<p:ajax event="change"  update="clinica1"
+												execute="@form" 
+												listener="#{especialidadeBean.getListaClinicas()}"
+												ajax="false" />
+										</h:selectOneMenu>
+	                                    <br/>
+										<h:outputLabel value="Região" style="font-weight:bold" />
+										<h:selectOneMenu id="classe3" style="width: 258px;">
+											<f:selectItem itemLabel="Brasilia" itemValue="" />
+										</h:selectOneMenu>
+										<br/>
+										<h:outputLabel value="Unidade" style="font-weight:bold" />
+										<h:selectOneMenu id="classe4" style="width: 258px;">
+											<f:selectItem itemLabel="Selecione Unidade" itemValue="" />
+											<f:selectItem itemLabel="Guara I" itemValue="" />
+											<f:selectItem itemLabel="Guara II" itemValue="" />
+											<f:selectItem itemLabel="Lucio Costas" itemValue="" />
+											<f:selectItem itemLabel="Colonias Agricola" itemValue="" />
+										</h:selectOneMenu>
+										<br />
+										<h:outputLabel for="clinica1" value="Clinica" style="font-weight:bold" />
+										<h:selectOneMenu id="clinica1" 
+										                 value="#{agendamentoBean.clinica}" 
+										                 process="@this"
+										                 immediate="true" 
+										                 style="width: 258px;"
+										                 required="true"
+										                 requiredMessage="Campo Clinica Vazio">
+											<f:selectItem itemLabel="Selecione Clinica"  itemValue="" noSelectionOption="true"  />
+											<f:selectItems value="#{especialidadeBean.clinicas}" var="cli" itemLabel="#{cli.nomeFantasia}"  />
+										    <f:converter converterId="entityConverter"/>
+										</h:selectOneMenu>
+										<br />
+
+									</h:panelGrid>
+								</p:panel>
+							 
+							</h:panelGrid>
+							  	<p:commandButton value="Avançar" ajax="false" process="@this" 
+								icon="ui-icon-check" action="#{agendamentoBean.getListaMedicos()}" update=":form:medicos1" />
+
+						</h:panelGrid>
+
+</html>

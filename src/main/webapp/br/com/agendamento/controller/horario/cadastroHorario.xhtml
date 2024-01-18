@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+	<p:dialog  header="Cadastro Horario" widgetVar="dlg10" modal="true"
+			height="500" width="1000" top="20">
+	
+           <p:growl id="growl6" showDetail="true" sticky="true" autoUpdate="true"  showSummary="false"  />
+					    
+		   <h:panelGrid columns="3" cellpadding="1"  >      
+				<h:outputLabel   value="Medico: " style="font-weight:bold" />
+				   <p:spacer width="5" height="10" />
+				<h:selectOneMenu  value="#{horarioBean.idMedico}" style="width: 258px;" required="true" requiredMessage="Campo medico vazio">
+								<f:selectItem itemLabel="Selecione Medico" itemValue="" />
+								<f:selectItems value="#{medicoBean.listMedicosAll()}" var="esp" itemLabel="#{esp.nmMedico}" itemValue="#{esp.idMedico}" />
+				                <p:ajax event="change"  update="tabela2" listener="#{horarioBean.getListaHorario()}" ajax="false" />
+				</h:selectOneMenu>	 
+		   </h:panelGrid>
+		   <br/>
+		   <br/>
+            <h:panelGrid columns="5" cellpadding="1"  >      		  
+	                <h:outputLabel value="Data Disponivel: " style="font-weight:bold" />
+                      <p:calendar id="button" value="#{horarioBean.dtinicial}" showOn="button" pattern="dd/MM/yyyy"  timeZone="America/Sao_Paulo" required="true" requiredMessage="data esta vazio"/>
+                      <p:spacer width="10" height="10" />
+                      <h:outputLabel value="Horario de Atendimento: " style="font-weight:bold"   />
+					  <p:calendar id="time" value="#{horarioBean.dtfinal}" pattern="HH:mm" timeZone="America/Sao_Paulo" timeOnly="true" required="true" requiredMessage="horario esta vazio"  />
+             </h:panelGrid>
+             <br/>
+             <h:panelGrid columns="1" cellpadding="5"  >      				
+                  <p:commandButton value="Adcionar" action="#{horarioBean.addListaHorario()}" update="tabela2"></p:commandButton>
+             </h:panelGrid>
+             <br/>
+			 <h:panelGrid  columns="1" cellpadding="4" >
+						 <p:dataTable id="tabela2"   editable="true"  var="c"  value="#{horarioBean.listaHorarios}">
+				                  <p:column headerText="Data">
+					                        <h:outputText value="#{c.dataDisponivel}" > 
+					                            <f:convertDateTime  pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />  
+					                        </h:outputText> 
+				                   </p:column>
+			                       <p:column headerText="Hora">				                        
+					                       <h:outputText value="#{c.horario}" >
+					                                   <f:convertDateTime pattern="HH:mm" timeZone="America/Sao_Paulo" />
+					                        </h:outputText> 
+				                   </p:column>
+				                   <p:column headerText="Unidade">
+					                                  <h:outputText value="Guara" />
+				                   </p:column>
+				                   <p:column headerText="Clinica">
+					                             <h:outputText value="#{c.medico.clinica.nomeFantasia}" />
+				                   </p:column>
+				                   <p:column headerText="profissional">
+					                              <h:outputText value="#{c.medico.nmMedico}" />
+				                   </p:column>
+				                   <p:column style="text-align: center">
+					                      <f:facet name="header">
+						                         <h:outputText value="Excluir" />
+					                    </f:facet>
+					                   <p:commandButton value="Excluir" action="#{horarioBean.excluir()}"  update="tabela2" />
+				                   </p:column>
+		               </p:dataTable>
+		               
+		               
+				 </h:panelGrid>
+
+      </p:dialog>
+
+</html>

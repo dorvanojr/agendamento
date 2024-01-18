@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Controle de Agendamento</title>
+	<style>
+body {
+	background-color: #eeeeee;
+	padding-bottom: 40px;
+}
+</style>
+</h:head>
+
+<h:body>
+	<!-- Consultar Medico -->
+	
+	<p:panel id="panel" header="Consultar Medico" style="height:600px;">
+		<h:form id="form">
+		
+			<h:panelGrid id="grid5" columns="3" cellpadding="4">
+				<p:inputText value="#{medicoBean.parametros}" />
+				<p:commandButton value="Pesquisar" action="#{medicoBean.acao()}"
+					icon="ui-icon-check" ajax="false" />
+			</h:panelGrid>
+			<!-- Listar todos os Clientes -->
+			<p:growl id="msgs1" showDetail="true" />
+           
+
+			<p:dataTable id="tabela"  value="#{medicoBean.medicos}" var="c"
+				editable="true">
+				 
+				 <p:ajax event="rowEdit" listener="#{medicoBean.onRowEdit}"
+					update=":form:msgs1" />
+				<p:ajax event="rowEditCancel"
+					listener="#{medicoBean.onRowCancel}" update=":form:msgs1" />
+			
+			
+
+				<p:column headerText="id">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.idMedico}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.idMedico}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Nome">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.nmMedico}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.nmMedico}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="CPF/CNPJ">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.cpfCnpj}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.cpfCnpj}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Dias de Atendimento">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.diasAtendimento}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.diasAtendimento}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Horario de Atendimento">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.horarioAtendimento}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.horarioAtendimento}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Clinica">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.clinica.nomeFantasia}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.clinica.nomeFantasia}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>	
+				</p:column>
+				<p:column headerText="Endereco">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.endereco[0].endereco}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.endereco[0].endereco}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>		  
+				<p:column headerText="Telefone">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{c.telefone[0].telefone}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{c.telefone[0].telefone}" style="width:100%"
+								disabled="true" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column style="text-align: center">
+					<f:facet name="header">
+						<h:outputText value="Excluir" />
+					</f:facet>
+					<p:commandButton value="Excluir"
+						onclick="PF('confirmation').show()" type="button" />
+				</p:column>
+				<p:column headerText="Alterar">
+					<p:commandButton value="Alterar" image="ui-icon-tag"
+						update=":form:grid2 " oncomplete="PF('dlg6').show()">
+						<f:setPropertyActionListener value="#{c}"
+							target="#{medicoBean.medico1}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+             <!-- cadastro Medicos -->
+             <ui:include src="cadastroMedico.xhtml"/>
+             <ui:include src="updateMedico.xhtml"/>
+
+			<h:panelGrid id="grid4" columns="3" cellpadding="4" >
+				<p:commandButton value="Cadastrar" icon="ui-icon-disk"
+					onclick="PF('dlg5').show();"  immediate="true" process="@this" update=":form:grid" />
+				<p:commandButton value="Voltar" icon="ui-icon-arrowthick-1-w" action="#{controllerRoute.home}"/>
+			</h:panelGrid>
+
+
+			<!-- Excluir Medicos -->
+			<p:confirmDialog
+				message="Tem Certeza que deseja excluir este registro?"
+				showEffect="bounce" hideEffect="explode" resizable="false"
+				modal="true" header="Excluir" severity="alert"
+				widgetVar="confirmation">
+				<p:commandButton value="Sim" update=":form:tabela"
+					oncomplete="PF('confirmation').hide()"
+					action="#{medicoBean.excluir()}" />
+				<p:commandButton value="Não" onclick="PF('confirmation').hide()"
+					type="button" />
+			</p:confirmDialog>
+
+			<!-- Listar todos os Medicos -->
+			<ui:include src="consultaMedicoAll.xhtml"/>
+			
+			<p:growl id="msgs" showDetail="true" />
+			
+	         
+	           
+       </h:form>
+
+	</p:panel>
+      
+	<!-- Cadastro Medicos-->
+
+
+</h:body>
+
+</html>
