@@ -1,1 +1,1 @@
-crud em JSF, Primefaces e Hibernate e Mysql e spring MVC e spring security
+crud em JSF, Primefaces e Hibernate e Mysql e CDI e spring security
